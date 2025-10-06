@@ -1,0 +1,24 @@
+{
+  "name": "week2-express",
+  "version": "1.0.0",
+  "description": "Week 2 Express.js Assignment",
+  "main": "index.js",
+  "scripts": {
+    "start": "node products.js",       
+    "dev": "nodemon products.js",     
+    "task1": "node index.js",          
+    "dev-task1": "nodemon index.js"    
+  },
+  "keywords": [],
+  "author": "Daniel Muturi",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.1.0",
+    "body-parser": "^1.20.2",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

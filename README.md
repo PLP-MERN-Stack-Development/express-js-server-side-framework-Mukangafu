@@ -1,62 +1,144 @@
-# Express.js RESTful API Assignment
+Week 2 Express.js Assignment
+Overview
 
-This assignment focuses on building a RESTful API using Express.js, implementing proper routing, middleware, and error handling.
+This project demonstrates a fully functional Express.js API with two main tasks:
 
-## Assignment Overview
+Task 1: Hello World Server – A basic Express server that responds with a message at localhost:3000.
 
-You will:
-1. Set up an Express.js server
-2. Create RESTful API routes for a product resource
-3. Implement custom middleware for logging, authentication, and validation
-4. Add comprehensive error handling
-5. Develop advanced features like filtering, pagination, and search
+Task 2: Products API – A RESTful API with CRUD operations for products, including middleware for logging, authentication, validation, and an HTML page to view and add products directly.
 
-## Getting Started
+Advanced features include filtering, searching, pagination, and product statistics.
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Install dependencies:
-   ```
-   npm install
-   ```
-4. Run the server:
-   ```
-   npm start
-   ```
+Features
+Task 1 – Hello World
 
-## Files Included
+Runs on Port 3000.
 
-- `Week2-Assignment.md`: Detailed assignment instructions
-- `server.js`: Starter Express.js server file
-- `.env.example`: Example environment variables file
+Logs every request using custom middleware.
 
-## Requirements
+Simple "Hello World" response.
 
-- Node.js (v18 or higher)
-- npm or yarn
-- Postman, Insomnia, or curl for API testing
+Task 2 – Products API
 
-## API Endpoints
+Runs on Port 4000.
 
-The API will have the following endpoints:
+RESTful routes:
 
-- `GET /api/products`: Get all products
-- `GET /api/products/:id`: Get a specific product
-- `POST /api/products`: Create a new product
-- `PUT /api/products/:id`: Update a product
-- `DELETE /api/products/:id`: Delete a product
+GET /api/products – List all products with optional filtering, search, and pagination.
 
-## Submission
+GET /api/products/:id – Retrieve a specific product by ID.
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+POST /api/products – Add a new product (requires API key).
 
-1. Complete all the required API endpoints
-2. Implement the middleware and error handling
-3. Document your API in the README.md
-4. Include examples of requests and responses
+PUT /api/products/:id – Update a product (requires API key).
 
-## Resources
+DELETE /api/products/:id – Delete a product (requires API key).
 
-- [Express.js Documentation](https://expressjs.com/)
-- [RESTful API Design Best Practices](https://restfulapi.net/)
-- [HTTP Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) 
+GET /api/products/stats – Get statistics like total products, in-stock count, and count by category.
+
+Middleware:
+
+Logging middleware logs method, URL, and timestamp.
+
+Authentication middleware using API key 12345.
+
+Validation middleware for product creation and updates.
+
+Global error handler with proper HTTP status codes.
+
+HTML interface:
+
+View products in a table at /products.
+
+Add products directly via an HTML form.
+
+Installation
+
+Clone the repository:
+
+git clone <YOUR_GITHUB_REPO_URL>
+cd express-js-server-side-framework-Mukangafu
+
+
+Install dependencies:
+
+npm install
+
+
+Create a .env file based on .env.example:
+
+PORT_TASK1=3000
+PORT_TASK2=4000
+API_KEY=12345
+
+Running the Project
+Task 1 – Hello World
+npm run task1
+
+
+Open in browser:
+
+http://localhost:3000
+
+Task 2 – Products API
+npm start
+
+
+Open in browser:
+
+http://localhost:4000/products
+
+
+You can also test API endpoints via Postman, Insomnia, or curl.
+
+API Endpoints
+Method	Endpoint	Description	Requires API Key
+GET	/api/products	List all products (supports filter/search/pagination)	No
+GET	/api/products/:id	Get a product by ID	No
+POST	/api/products	Add a new product	Yes
+PUT	/api/products/:id	Update a product	Yes
+DELETE	/api/products/:id	Delete a product	Yes
+GET	/api/products/stats	Get product statistics	No
+Example: Add Product (POST /api/products)
+
+Headers:
+
+Content-Type: application/json
+x-api-key: 12345
+
+
+Body:
+
+{
+  "name": "Tablet",
+  "description": "Android tablet",
+  "price": 15000,
+  "category": "Electronics",
+  "inStock": true
+}
+
+HTML Form
+
+Open in browser: http://localhost:4000/products
+
+View products in a table and add new products directly.
+
+Environment Variables (.env)
+PORT_TASK1=3000       # Port for Task 1
+PORT_TASK2=4000       # Port for Task 2
+API_KEY=12345         # API key for protected routes
+
+Notes
+
+Products data is stored in-memory (reset on server restart).
+
+Error handling is implemented with custom error classes for validation and not found errors.
+
+Middleware handles logging, authentication, and validation.
+
+Advanced features include filtering by category, search by name, pagination, and product statistics.
+
+License
+
+ISC
+Author: Daniel Muturi
