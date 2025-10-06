@@ -1,113 +1,180 @@
-Week 2 Express.js Assignment
-Overview
+# Week 2 Express.js Assignment
 
-This project demonstrates a fully functional Express.js API with two main tasks:
+## Author
+**Daniel Muturi**
 
-Task 1: Hello World Server – A basic Express server that responds with a message at localhost:3000.
+---
 
-Task 2: Products API – A RESTful API with CRUD operations for products, including middleware for logging, authentication, validation, and an HTML page to view and add products directly.
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Technologies Used](#technologies-used)
+- [Setup Instructions](#setup-instructions)
+- [Environment Variables](#environment-variables)
+- [API Endpoints](#api-endpoints)
+- [Frontend Access](#frontend-access)
+- [Features](#features)
+- [Testing](#testing)
+- [License](#license)
 
-Advanced features include filtering, searching, pagination, and product statistics.
+---
 
-Features
-Task 1 – Hello World
+## Project Overview
 
-Runs on Port 3000.
+This project is a demonstration of an Express.js API implementing RESTful routes, middleware, validation, authentication, error handling, and advanced features such as filtering, search, and pagination.  
 
-Logs every request using custom middleware.
+The assignment includes:  
 
-Simple "Hello World" response.
+1. **Task 1 - Hello World API** (`index.js`)
+2. **Task 2 - Products API** (`products.js`)  
+   - CRUD operations on products  
+   - Authentication using API key  
+   - Validation middleware  
+   - Logging middleware  
+   - Global error handling  
+   - HTML frontend for viewing and adding products  
 
-Task 2 – Products API
+---
 
-Runs on Port 4000.
+## Technologies Used
+- Node.js (v18 or higher recommended)
+- Express.js (v5.x)
+- Body-parser
+- UUID
+- Nodemon (for development)
+- Git & GitHub
 
-RESTful routes:
+---
 
-GET /api/products – List all products with optional filtering, search, and pagination.
+## Setup Instructions
 
-GET /api/products/:id – Retrieve a specific product by ID.
+1. Clone your repository:
+   ```bash
+   git clone https://github.com/PLP-MERN-Stack-Development/express-js-server-side-framework-Mukangafu.git
+   cd express-js-server-side-framework-Mukangafu
 
-POST /api/products – Add a new product (requires API key).
-
-PUT /api/products/:id – Update a product (requires API key).
-
-DELETE /api/products/:id – Delete a product (requires API key).
-
-GET /api/products/stats – Get statistics like total products, in-stock count, and count by category.
-
-Middleware:
-
-Logging middleware logs method, URL, and timestamp.
-
-Authentication middleware using API key 12345.
-
-Validation middleware for product creation and updates.
-
-Global error handler with proper HTTP status codes.
-
-HTML interface:
-
-View products in a table at /products.
-
-Add products directly via an HTML form.
-
-Installation
-
-Clone the repository:
-
-git clone <YOUR_GITHUB_REPO_URL>
-cd express-js-server-side-framework-Mukangafu
-
-
-Install dependencies:
+2. Install dependencies:
 
 npm install
 
 
-Create a .env file based on .env.example:
+3. Start the APIs:
 
-PORT_TASK1=3000
-PORT_TASK2=4000
-API_KEY=12345
+Task 1 (Hello World):
 
-Running the Project
-Task 1 – Hello World
 npm run task1
 
 
-Open in browser:
+Runs on port 3000 (default in index.js)
 
-http://localhost:3000
+Test in browser: http://localhost:3000
 
-Task 2 – Products API
+Task 2 (Products API):
+
 npm start
 
 
-Open in browser:
+Runs on port 4000 (default in products.js)
 
-http://localhost:4000/products
+Test in browser: http://localhost:4000/products
 
+Environment Variables
 
-You can also test API endpoints via Postman, Insomnia, or curl.
+Create a .env file based on .env.example:
+
+PORT_INDEX=3000
+PORT_PRODUCTS=4000
+API_KEY=12345
 
 API Endpoints
-Method	Endpoint	Description	Requires API Key
-GET	/api/products	List all products (supports filter/search/pagination)	No
-GET	/api/products/:id	Get a product by ID	No
-POST	/api/products	Add a new product	Yes
-PUT	/api/products/:id	Update a product	Yes
-DELETE	/api/products/:id	Delete a product	Yes
-GET	/api/products/stats	Get product statistics	No
-Example: Add Product (POST /api/products)
+Products API (products.js)
 
-Headers:
+All routes (except the HTML view) require JSON request bodies for POST/PUT, and some require API key in headers.
 
-Content-Type: application/json
-x-api-key: 12345
+Public Routes
+
+GET /api/products – List all products with optional filtering, search, and pagination:
+
+Query Parameters:
+  category: string (optional)
+  search: string (optional)
+  page: number (optional)
+  limit: number (optional)
 
 
-Body:
+GET /api/products/:id – Get a product by ID
+
+Protected Routes (require header x-api-key: 12345)
+
+POST /api/products – Add a new product
+
+PUT /api/products/:id – Update an existing product
+
+DELETE /api/products/:id – Delete a product
+
+Extra Routes
+
+GET /api/products/stats – Get statistics about products by category and stock
+
+GET /products – HTML frontend to view products and add new products directly
+
+Frontend Access
+
+Open in your browser:
+http://localhost:4000/products
+
+View all products in a table
+
+Add new products via the form (requires API key 12345 internally)
+
+Features
+
+Middleware
+
+Logging requests with method, URL, and timestamp
+
+Authentication using API key
+
+Validation for product creation and update
+
+JSON body parsing
+
+Error Handling
+
+Custom error classes (NotFoundError, ValidationError)
+
+Global error handler with proper HTTP status codes
+
+Advanced Features
+
+Filtering products by category
+
+Pagination support
+
+Search products by name
+
+Product statistics by category and stock availability
+
+Frontend
+
+Simple HTML table for displaying products
+
+Form to add products without using Postman
+
+Testing
+
+You can test the API using:
+
+Browser (for /products HTML view)
+
+Postman / Insomnia / cURL for API endpoints
+
+Example with Postman:
+
+GET all products: GET http://localhost:4000/api/products
+
+Add product: POST http://localhost:4000/api/products
+Headers: x-api-key: 12345
+Body (JSON):
 
 {
   "name": "Tablet",
@@ -117,28 +184,6 @@ Body:
   "inStock": true
 }
 
-HTML Form
-
-Open in browser: http://localhost:4000/products
-
-View products in a table and add new products directly.
-
-Environment Variables (.env)
-PORT_TASK1=3000       # Port for Task 1
-PORT_TASK2=4000       # Port for Task 2
-API_KEY=12345         # API key for protected routes
-
-Notes
-
-Products data is stored in-memory (reset on server restart).
-
-Error handling is implemented with custom error classes for validation and not found errors.
-
-Middleware handles logging, authentication, and validation.
-
-Advanced features include filtering by category, search by name, pagination, and product statistics.
-
 License
 
-ISC
-Author: Daniel Muturi
+This project is licensed under ISC.
